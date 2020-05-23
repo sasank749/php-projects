@@ -1,0 +1,69 @@
+<html>
+<head>
+   <title>Registration Form</title>
+   <link rel="stylesheet" href="http://localhost:8012/loginstyles.css">
+<script>
+function validate(){  
+    var fname=document.myform.firstname.value;  
+    var lname=document.myform.lastname.value;
+	var mobilenum=document.myform.mobile.value;
+  	var email=document.myform.email.value;
+	var pass1=document.myform.password.value;
+	var pass2=document.myform.password2.value;
+	var emailpattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	console.log(mobilenum);
+	
+	if(fname.length<5){
+       alert("firstname should be a minimum of 5 characters");
+	   return false;
+    }
+
+    if(lname.length<5){
+       alert("lastname should be a minimum of 5 characters");
+	   return false;
+    }	
+
+	if(!emailpattern.test(email)){
+	   alert("Please enter a valid email address");
+	   return false;
+	}
+	
+	if(mobilenum.length!=10){
+       alert("Please enter a valid 10 digit mobile number");
+	   return false;
+    }
+	
+    if(pass1 != pass2){
+       alert("passwords does'nt match");
+	   return false;
+    }else{
+	   var passpattern=/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+       if(passpattern.test(pass1)){
+		   return true;
+	   }else{
+	       alert("password does'nt have strength, please put one captial letter one small letter one digit and should be atleast a minumum of 8 words");
+		   return false;
+	   }
+    }	       
+}
+</script>  
+</head>
+
+<body>
+<form name="myform" method="post" onsubmit="return validate()" action="http://localhost:8012/myDb.php">
+ <div id="login-box">
+  <div class="left">
+    <h1>Join Now</h1>
+	<input type="text" name="firstname" id="firstname" placeholder="firstname" required/>
+	<input type="text" name="lastname"  id="lastname" placeholder="lastname" required/>
+    <input type="text" name="email" id="email" placeholder="E-mail" required/>
+	<input type="number" name="mobile" id="mobile" placeholder="mobile" required/>
+    <input type="password" name="password" id="password" placeholder="Password" required/>
+    <input type="password" name="password2" id="password2" placeholder="Retype password" required/>
+	<input type="submit" name="submit" value="Join Now"/>
+	
+  </div>
+</div>
+</form>
+</body>
+</html>
